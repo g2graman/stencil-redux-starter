@@ -21,7 +21,7 @@ export class MyApp {
   };
 
   @Prop({ context: 'store' }) store: Store;
-  @State() count: number = 0;
+  @State() readonly count: number = 0;
 
   componentWillLoad() {
     setupStore(this, Actions, initialState);

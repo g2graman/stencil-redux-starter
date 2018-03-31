@@ -1,6 +1,6 @@
 import { Action } from '@stencil/redux';
 
-import map from 'lodash.map';
+import * as map from 'lodash.map';
 
 import { configureStore } from '../components/state/store';
 
