@@ -9,6 +9,8 @@ import {
   setupStore,
 } from '../../shared/utils';
 
+import { css } from '../../shared/styles';
+
 @Component({
   tag: 'my-app',
   styleUrl: 'my-app.css'
@@ -50,9 +52,9 @@ export class MyApp {
           </stencil-router>
         </main>
 
-        <button onClick={this.doIncrement}>INCREMENT</button>
-        <button onClick={this.doDecrement}>DECREMENT</button>
-        <input type="number" value={this.count} readonly/>
+        <button class={css.button} onClick={this.doIncrement}>INCREMENT</button>
+        <button class={css.button} onClick={this.doDecrement}>DECREMENT</button>
+        <input type='number' value={this.count} readonly/>
       </div>
     );
   }
