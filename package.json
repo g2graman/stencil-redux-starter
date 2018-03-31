@@ -12,7 +12,8 @@
     "serve": "npx stencil-dev-server",
     "start": "npm run dev",
     "test": "npx jest --no-cache",
-    "test.watch": "npx jest --watch --no-cache"
+    "test.watch": "npx jest --watch --no-cache",
+    "precommit": "lint-staged -d"
   },
   "dependencies": {
     "@stencil/core": "0.7.7",
@@ -33,9 +34,13 @@
     "@stencil/utils": "latest",
     "@types/jest": "^21.1.1",
     "jest": "^21.2.1",
-    "jest-cli": "^22.4.3"
+    "jest-cli": "^22.4.3",
+    "lint-staged": "^7.0.1"
   },
   "license": "MIT",
+  "lint-staged": {
+    "*.spec.ts": ["yarn test --bail --findRelatedTests"]
+  },
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
