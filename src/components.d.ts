@@ -24,6 +24,7 @@ declare global {
 }
 
 import '@stencil/router';
+import '@stencil/redux';
 
 import {
   MatchResults,
