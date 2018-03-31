@@ -1,14 +1,14 @@
 {
-  "name": "@stencil/starter",
+  "name": "stencil-redux-starter",
   "private": true,
   "version": "0.0.1",
-  "description": "Stencil App Starter",
+  "description": "Stencil-Redux App Starter",
   "files": [
     "dist/"
   ],
   "scripts": {
     "build": "stencil build --prerender",
-    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "dev": "npx concurrently \"stencil build --dev --watch\" \"stencil-dev-server\" ",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
@@ -18,12 +18,13 @@
     "@stencil/core": "0.7.7",
     "@stencil/redux": "0.0.4",
     "@stencil/router": "0.0.28",
+    "express": "^4.16.3",
     "lodash.get": "^4.4.2",
+    "lodash.map": "^4.6.0",
     "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
-    "typescript": "^2.8.1",
-    "typescript-fsa": "^2.5.0",
-    "typescript-fsa-reducers": "^0.4.5"
+    "typescript": "^2.9.0-dev.20180330"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
@@ -31,16 +32,7 @@
     "@types/jest": "^21.1.1",
     "jest": "^21.2.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ionic-team/stencil-app-starter.git"
-  },
-  "author": "Ionic Team",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ionic-team/stencil"
-  },
-  "homepage": "https://github.com/ionic-team/stencil",
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
@@ -50,8 +42,8 @@
       "ts",
       "tsx",
       "js",
-      "json",
-      "jsx"
+      "jsx",
+      "json"
     ]
   }
 }

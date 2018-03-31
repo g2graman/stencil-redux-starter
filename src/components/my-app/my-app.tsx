@@ -1,45 +1,36 @@
 import { Component, Prop, State } from '@stencil/core';
-import { Action, Store } from '@stencil/redux';
+import { Store } from '@stencil/redux';
 
 import Actions from '../state/actions';
-import { configureStore } from '../state/store';
 import initialState from '../state/state';
+
+import {
+  mapDispatchtoMethods,
+  setupStore,
+} from '../../shared/utils';
 
 @Component({
   tag: 'my-app',
   styleUrl: 'my-app.css'
 })
 export class MyApp {
-  @Prop({ context: 'store' }) store: Store;
-  @State() count: number;
-
-  /* should match Actions.INCREMENT.ACTION.name */ increment: Action;
-  /* should match Actions.DECREMENT.ACTION.name */ decrement: Action;
-
-  componentWillLoad() {
-    this.store.setStore(configureStore(initialState));
-
-    this.store.mapStateToProps(this, (state) => {
-      const {
-        count
-      } = state;
-
-      return count;
-    });
-
-    this.store.mapDispatchToProps(this, {
-      [Actions.INCREMENT.ACTION.name]: Actions.INCREMENT.ACTION,
-      [Actions.DECREMENT.ACTION.name]: Actions.DECREMENT.ACTION,
-    });
-
-  }
-
-  doIncrement = () => {
-    this.increment();
+  constructor() {
+    mapDispatchtoMethods(this, Actions);
   };
 
-  doDecrement = () =>  {
-    this.decrement();
+  @Prop({ context: 'store' }) store: Store;
+  @State() count: number = 0;
+
+  componentWillLoad() {
+    setupStore(this, Actions, initialState);
+  }
+
+  doIncrement = () => { // avoid having to bind this method for use in render
+    this[Actions.INCREMENT.ACTION.name]();
+  };
+
+  doDecrement = () =>  { // avoid having to bind this method for use in render
+    this[Actions.DECREMENT.ACTION.name]();
   };
 
   render() {
@@ -48,6 +39,7 @@ export class MyApp {
         <header>
           <h1>Stencil App Starter</h1>
         </header>
+
         <main>
           <stencil-router>
             <stencil-route url='/' component='app-home' exact={true}>
@@ -60,7 +52,7 @@ export class MyApp {
 
         <button onClick={this.doIncrement}>INCREMENT</button>
         <button onClick={this.doDecrement}>DECREMENT</button>
-        <input type="number" value={this.count}/>
+        <input type="number" value={this.count} readonly/>
       </div>
     );
   }

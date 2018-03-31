@@ -29,6 +29,6 @@ const countReducer = (state: COUNT_STATE = initialState, action: ActionTypes) =>
   return state;
 };
 
-export default combineReducers<COUNT_STATE>({
+export default combineReducers({
   count: countReducer
 });
