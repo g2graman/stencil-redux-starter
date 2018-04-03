@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import get from 'lodash.get';
+import get from 'lodash-es/get';
 
 import initialState, {COUNT_STATE} from './state';
 import { TypeKeys, ActionTypes } from './actions';
+import {Action} from "@stencil/redux";
 
 const reduceIncrement = (state: COUNT_STATE = initialState) => ({
   ...state,
@@ -20,7 +21,7 @@ const REDUCER_MAP = {
 };
 
 const countReducer = (state: COUNT_STATE = initialState, action: ActionTypes) => {
-  let actionHandler = get(REDUCER_MAP, action.type);
+  let actionHandler = <Action> get(REDUCER_MAP, action.type);
 
   if (actionHandler) {
     return actionHandler(state) as COUNT_STATE;

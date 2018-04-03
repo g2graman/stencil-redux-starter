@@ -1,30 +1,33 @@
 import { Component, Prop, State } from '@stencil/core';
 import { Store } from '@stencil/redux';
+import {inject, injectable} from 'inversify';
+
+import container from '../../config/config';
+import { Identifiers } from '../../config/constants';
 
 import Actions from '../state/actions';
 import initialState from '../state/state';
 
-import {
-  mapDispatchtoMethods,
-  setupStore,
-} from '../../shared/utils';
-
+import Utilities from '../../shared/utils';
 import { css } from '../../shared/styles';
 
+@injectable()
 @Component({
   tag: 'my-app',
   styleUrl: 'my-app.css'
 })
 export class MyApp {
-  constructor() {
-    mapDispatchtoMethods(this, Actions);
+  constructor(
+    @inject(Identifiers.Utilities) private utilities: Utilities = container.get<Utilities>(Identifiers.Utilities)
+  ) {
+    this.utilities.mapDispatchtoMethods(this, Actions);
   };
 
   @Prop({ context: 'store' }) store: Store;
   @State() readonly count: number = 0;
 
   componentWillLoad() {
-    setupStore(this, Actions, initialState);
+    this.utilities.setupStore(this, Actions, initialState);
   }
 
   doIncrement = () => { // avoid having to bind this method for use in render
