@@ -56,6 +56,9 @@
       "git add"
     ]
   },
+  "engines": {
+    "npm": "^5.8.0"
+  },
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
