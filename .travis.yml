@@ -14,4 +14,4 @@ cache:
   - yarn
   - npm
 script:
-    - yarn test
+    - npm ci && yarn ci

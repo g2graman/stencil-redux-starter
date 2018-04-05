@@ -6,7 +6,7 @@ import { Identifiers } from '../config/constants';
 import {
   ActionMap,
   ConfigureStoreFn,
-  LodashMapFn,
+  LodashMapFn
 } from '../config/types';
 
 import { MyApp } from '../components/my-app/my-app';
@@ -16,7 +16,7 @@ export default class Utilities {
   @inject(Identifiers.LodashMapFn) private readonly _map: LodashMapFn;
   @inject(Identifiers.ConfigureStoreFn) private readonly _configureStore: ConfigureStoreFn;
 
-  mapDispatchtoProps(ActionMap: ActionMap) {
+  mapDispatchtoProps (ActionMap: ActionMap) {
     return this._map(
       ActionMap,
       (actionSpace: {
@@ -24,20 +24,20 @@ export default class Utilities {
       }) => ({
         [actionSpace.ACTION.name]: actionSpace.ACTION
       })).reduce((acc, current) => ({
-      ...acc,
-      ...current
-    }));
+        ...acc,
+        ...current
+      }));
   }
 
-   mapDispatchtoMethods(ctx: MyApp, ActionMap: ActionMap ) {
+  mapDispatchtoMethods (ctx: MyApp, ActionMap: ActionMap) {
     const dispatch = this.mapDispatchtoProps(ActionMap);
 
     Object.keys(dispatch).forEach(
       actionDispatch => ctx[actionDispatch] = dispatch[actionDispatch]
     );
-  };
+  }
 
-  setupStore(ctx: MyApp, ActionMap: ActionMap, initialState) {
+  setupStore (ctx: MyApp, ActionMap: ActionMap, initialState) {
     ctx.store.setStore(this._configureStore(initialState));
 
     ctx.store.mapStateToProps(ctx, (state) => {
@@ -49,5 +49,5 @@ export default class Utilities {
     });
 
     ctx.store.mapDispatchToProps(ctx, this.mapDispatchtoProps(ActionMap));
-  };
-};
+  }
+}

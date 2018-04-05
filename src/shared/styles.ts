@@ -1,5 +1,5 @@
 import { em, px, translateY } from 'csx';
-import { stylesheet } from "typestyle";
+import { stylesheet } from 'typestyle';
 
 export const css = stylesheet({
   button: {
@@ -23,5 +23,5 @@ export const css = stylesheet({
         transform: translateY(px(1))
       }
     }
-  },
+  }
 });

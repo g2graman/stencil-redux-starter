@@ -9,7 +9,7 @@ import Utilities from '../shared/utils';
 
 import {
   ConfigureStoreFn,
-  LodashMapFn,
+  LodashMapFn
 } from './types';
 
 import { Identifiers } from './constants';

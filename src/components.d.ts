@@ -14,21 +14,17 @@ declare global {
   namespace JSXElements {}
 
   interface HTMLStencilElement extends HTMLElement {
-    componentOnReady(): Promise<this>;
-    componentOnReady(done: (ele?: this) => void): void;
+    componentOnReady (): Promise<this>;
+    componentOnReady (done: (ele?: this) => void): void;
 
-    forceUpdate(): void;
+    forceUpdate (): void;
   }
 
   interface HTMLAttributes {}
 }
 
-import '@stencil/router';
+import Router, { MatchResults } from '@stencil/router';
 import '@stencil/redux';
-
-import {
-  MatchResults,
-} from '@stencil/router';
 
 declare global {
   interface HTMLAppHomeElement extends HTMLStencilElement {
@@ -56,7 +52,6 @@ declare global {
   }
 }
 
-
 declare global {
   interface HTMLAppProfileElement extends HTMLStencilElement {
     'match': MatchResults;
@@ -82,7 +77,6 @@ declare global {
     }
   }
 }
-
 
 declare global {
   interface HTMLMyAppElement extends HTMLStencilElement {

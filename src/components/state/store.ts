@@ -3,10 +3,10 @@ import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProductio
 import logger from 'redux-logger';
 
 import rootReducer from './reducers';
-import { COUNT_STATE } from './state';
+import { CountState } from './state';
 
-export const configureStore = (preloadedState: COUNT_STATE) => createStore(
-  rootReducer as Reducer<COUNT_STATE>,
+export const configureStore = (preloadedState: CountState) => createStore(
+  rootReducer as Reducer<CountState>,
   preloadedState,
   composeWithDevTools({})(applyMiddleware(logger))
 );
