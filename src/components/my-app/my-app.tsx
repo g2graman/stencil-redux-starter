@@ -1,8 +1,9 @@
 import { Component, Prop, State } from '@stencil/core';
 import { Store } from '@stencil/redux';
-import {inject, injectable} from 'inversify';
 
 import container from '../../config/config';
+import getDecorators from "inversify-inject-decorators";
+
 import { Identifiers } from '../../config/constants';
 
 import Actions from '../state/actions';
@@ -11,22 +12,20 @@ import initialState from '../state/state';
 import Utilities from '../../shared/utils';
 import { css } from '../../shared/styles';
 
-@injectable()
+let { lazyInject } = getDecorators(container);
+
 @Component({
   tag: 'my-app',
   styleUrl: 'my-app.css'
 })
 export class MyApp {
-  constructor(
-    @inject(Identifiers.Utilities) private utilities: Utilities = container.get<Utilities>(Identifiers.Utilities)
-  ) {
-    this.utilities.mapDispatchtoMethods(this, Actions);
-  };
+  @lazyInject(Identifiers.Utilities) private readonly utilities: Utilities;
 
   @Prop({ context: 'store' }) store: Store;
   @State() readonly count: number = 0;
 
   componentWillLoad() {
+    this.utilities.mapDispatchtoMethods(this, Actions);
     this.utilities.setupStore(this, Actions, initialState);
   }
 

@@ -1,25 +1,20 @@
 import { Action } from '@stencil/redux';
-import { inject, injectable } from 'inversify';
 
+import { inject, injectable } from 'inversify';
 import { Identifiers } from '../config/constants';
+
 import {
   ActionMap,
   ConfigureStoreFn,
-  LodashMapFn
+  LodashMapFn,
 } from '../config/types';
+
+import { MyApp } from '../components/my-app/my-app';
 
 @injectable()
 export default class Utilities {
-  private _map: LodashMapFn;
-  private _configureStore: ConfigureStoreFn;
-
-  constructor(
-    @inject(Identifiers.LodashMapFn) map: LodashMapFn,
-    @inject(Identifiers.ConfigureStoreFn) configureStore: ConfigureStoreFn
-  ) {
-    this._map = map;
-    this._configureStore = configureStore;
-  }
+  @inject(Identifiers.LodashMapFn) private readonly _map: LodashMapFn;
+  @inject(Identifiers.ConfigureStoreFn) private readonly _configureStore: ConfigureStoreFn;
 
   mapDispatchtoProps(ActionMap: ActionMap) {
     return this._map(
@@ -34,7 +29,7 @@ export default class Utilities {
     }));
   }
 
-   mapDispatchtoMethods(ctx: any, ActionMap: ActionMap ) {
+   mapDispatchtoMethods(ctx: MyApp, ActionMap: ActionMap ) {
     const dispatch = this.mapDispatchtoProps(ActionMap);
 
     Object.keys(dispatch).forEach(
@@ -42,7 +37,7 @@ export default class Utilities {
     );
   };
 
-  setupStore(ctx: any, ActionMap: {[key: string]: { ACTION: Action }}, initialState) {
+  setupStore(ctx: MyApp, ActionMap: ActionMap, initialState) {
     ctx.store.setStore(this._configureStore(initialState));
 
     ctx.store.mapStateToProps(ctx, (state) => {

@@ -1,34 +1,23 @@
-
-import {Container, ContainerModule, interfaces} from 'inversify';
 import 'reflect-metadata';
+import { Container } from 'inversify';
 
 import map from 'lodash-es/map';
 
-import { configureStore } from "../components/state/store";
+import { configureStore } from '../components/state/store';
 
-import Utilities from "../shared/utils";
+import Utilities from '../shared/utils';
 
 import {
   ConfigureStoreFn,
-  LodashMapFn
-} from "./types";
+  LodashMapFn,
+} from './types';
 
-import { Identifiers } from "./constants";
+import { Identifiers } from './constants';
 
-const containerModule = new ContainerModule(
-  (
-    bind: interfaces.Bind
-  ) => {
-      bind<LodashMapFn>(Identifiers.LodashMapFn).toFunction(map);
-      bind<ConfigureStoreFn>(Identifiers.ConfigureStoreFn).toFunction(configureStore);
-      bind<Utilities>(Identifiers.Utilities).toService(Utilities);
-  }
-);
+let container = new Container();
 
-let container = new Container({
-  autoBindInjectable: true,
-  // defaultScope: "Singleton"
-});
+container.bind<LodashMapFn>(Identifiers.LodashMapFn).toFunction(map);
+container.bind<ConfigureStoreFn>(Identifiers.ConfigureStoreFn).toFunction(configureStore);
+container.bind<Utilities>(Identifiers.Utilities).to(Utilities);
 
-container.load(containerModule);
 export default container;
