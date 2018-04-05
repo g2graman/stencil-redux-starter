@@ -1,4 +1,8 @@
 {
+  "baseUrl": ".",
+  "typeRoots": [
+    "node_modules/@types"
+  ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
@@ -18,6 +22,10 @@
     "jsx": "react",
     "jsxFactory": "h"
   },
+  "paths": {
+  "lodash/*": [
+    "node_modules/@types/lodash-es/*"
+  ],
   "include": [
     "src"
   ],

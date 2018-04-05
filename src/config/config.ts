@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Container } from 'inversify';
 
-import map from 'lodash-es/map';
+import map from 'lodash/map';
 
 import { configureStore } from '../components/state/store';
 
@@ -16,7 +16,7 @@ import { Identifiers } from './constants';
 
 let container = new Container();
 
-container.bind<LodashMapFn>(Identifiers.LodashMapFn).toFunction(map);
+container.bind<LodashMapFn>(Identifiers.LodashMapFn).to(map);
 container.bind<ConfigureStoreFn>(Identifiers.ConfigureStoreFn).toFunction(configureStore);
 container.bind<Utilities>(Identifiers.Utilities).to(Utilities);
 

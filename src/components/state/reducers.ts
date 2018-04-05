@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import get from 'lodash-es/get';
+import get from 'lodash/get';
 
 import initialState, { CountState } from './state';
 import { TypeKeys, ActionTypes } from './actions';
