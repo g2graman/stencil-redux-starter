@@ -1,5 +1,5 @@
-import {em, px, translateY} from 'csx';
-import {stylesheet} from "typestyle";
+import { em, px, translateY } from 'csx';
+import { stylesheet } from 'typestyle';
 
 export const css = stylesheet({
   button: {
@@ -10,7 +10,7 @@ export const css = stylesheet({
     fontSize: px(13),
     fontWeight: 700,
     textTransform: 'uppercase',
-    padding: '16px 20px',
+    padding: [ px(16), px(20) ],
     borderRadius: px(2),
     boxShadow: '0 8px 16px rgba(0,0,0,.1), 0 3px 6px rgba(0,0,0,.08)',
     outline: 0,
@@ -23,5 +23,5 @@ export const css = stylesheet({
         transform: translateY(px(1))
       }
     }
-  },
+  }
 });

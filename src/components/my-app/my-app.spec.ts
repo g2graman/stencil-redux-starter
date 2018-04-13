@@ -1,4 +1,3 @@
-import { render } from '@stencil/core/testing';
 import { MyApp } from './my-app';
 
 describe('my-app', () => {
@@ -6,12 +5,16 @@ describe('my-app', () => {
     expect(new MyApp()).toBeTruthy();
   });
 
-  describe('rendering', () => {
-    beforeEach(async () => {
-      await render({
+  /*describe('rendering', () => {
+    let window: TestWindow;
+
+    beforeAll(async () => {
+      window = new TestWindow();
+
+      await window.load({
         components: [MyApp],
         html: '<my-app></my-app>'
       });
     });
-  });
+  });*/
 });

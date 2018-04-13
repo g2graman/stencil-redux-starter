@@ -1,4 +1,4 @@
-import { flush, render } from '@stencil/core/testing';
+import { TestWindow } from '@stencil/core/dist/testing';
 
 import { AppProfile } from './app-profile';
 
@@ -9,16 +9,19 @@ describe('app-profile', () => {
 
   describe('rendering', () => {
     let element;
+    let window: TestWindow;
 
-    beforeEach(async () => {
-      element = await render({
+    beforeAll(async () => {
+      window = new TestWindow();
+
+      element = await window.load({
         components: [AppProfile],
         html: '<app-profile></app-profile>'
       });
     });
 
     it('should not render any content if there is not a match', async () => {
-      await flush(element);
+      await window.flush();
       expect(element.textContent).toEqual('');
     });
 
@@ -29,7 +32,7 @@ describe('app-profile', () => {
         }
       };
 
-      await flush(element);
+      await window.flush();
       expect(element.textContent).toContain('Hello! My name is stencil. My name was passed in through a route param!');
     });
   });

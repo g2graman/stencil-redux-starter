@@ -1,4 +1,5 @@
-import { render } from '@stencil/core/testing';
+import { TestWindow } from '@stencil/core/dist/testing';
+
 import { AppHome } from './app-home';
 
 describe('app', () => {
@@ -7,10 +8,15 @@ describe('app', () => {
   });
 
   describe('rendering', () => {
-    beforeEach(async () => {
-      await render({
+    let element;
+    let window: TestWindow;
+
+    beforeAll(async () => {
+      window = new TestWindow();
+
+      element = await window.load({
         components: [AppHome],
-        html: '<app-home></app-home>'
+        html: '<app-profile></app-profile>'
       });
     });
   });

@@ -2,8 +2,8 @@ import { INCREMENT } from './increment';
 import { DECREMENT } from './decrement';
 
 export enum TypeKeys {
-  INCREMENT = "INCREMENT",
-  DECREMENT = "DECREMENT",
+  INCREMENT = 'INCREMENT',
+  DECREMENT = 'DECREMENT'
 }
 
 export type ActionTypes = {
@@ -12,5 +12,5 @@ export type ActionTypes = {
 
 export default {
   INCREMENT,
-  DECREMENT,
-}
+  DECREMENT
+};

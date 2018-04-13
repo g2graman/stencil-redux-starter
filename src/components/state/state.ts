@@ -1,5 +1,5 @@
-export interface COUNT_STATE {
+export interface CountState {
   count: number;
 }
 
-export default { count: 0 } as COUNT_STATE;
+export default { count: 0 } as CountState;

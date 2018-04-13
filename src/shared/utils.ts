@@ -1,40 +1,54 @@
 import { Action } from '@stencil/redux';
 
-import * as map from 'lodash.map';
+import { inject, injectable } from 'inversify';
+import { Identifiers } from '../config/constants';
 
-import { configureStore } from '../components/state/store';
+import {
+  ActionMap,
+  ConfigureStoreFn,
+  LodashMapFn
+} from '../config/types';
 
-export const mapDispatchtoProps = function mapDispatchtoProps(ActionMap: {[key: string]: { ACTION: Action }}){
-  return map(
-    ActionMap,
-    (actionSpace: {
-      ACTION: Action
-    }) => ({
-      [actionSpace.ACTION.name]: actionSpace.ACTION
-    })).reduce((acc, current) => ({
-    ...acc,
-    ...current
-  }));
-};
+import { MyApp } from '../components/my-app/my-app';
 
-export const mapDispatchtoMethods = function mapDispatchtoMethods(ctx: any, ActionMap: {[key: string]: { ACTION: Action }}) {
-  const dispatch = mapDispatchtoProps(ActionMap);
+@injectable()
+export default class Utilities {
+  @inject(Identifiers.LodashMapFn) private readonly _map: LodashMapFn;
+  @inject(Identifiers.ConfigureStoreFn) private readonly _configureStore: ConfigureStoreFn;
 
-  Object.keys(dispatch).forEach(
-    actionDispatch => ctx[actionDispatch] = dispatch[actionDispatch]
-  );
-};
+  mapDispatchtoProps (ActionMap: ActionMap) {
+    return this._map(
+      ActionMap,
+      (actionSpace: {
+        ACTION: Action
+      }) => ({
+        [actionSpace.ACTION.name]: actionSpace.ACTION
+      })).reduce((acc, current) => ({
+        ...acc,
+        ...current
+      }), {});
+  }
 
-export const setupStore = function setupStore(ctx: any, ActionMap: {[key: string]: { ACTION: Action }}, initialState) {
-  ctx.store.setStore(configureStore(initialState));
+  mapDispatchtoMethods (ctx: MyApp, ActionMap: ActionMap) {
+    const dispatch = this.mapDispatchtoProps(ActionMap);
 
-  ctx.store.mapStateToProps(ctx, (state) => {
-    const {
-      count
-    } = state;
+    Object.keys(dispatch).forEach(
+      actionDispatch => ctx[actionDispatch] = dispatch[actionDispatch]
+    );
+  }
 
-    return count;
-  });
+  setupStore (ctx: MyApp, ActionMap: ActionMap, initialState) {
+    console.log(ctx, ctx.store);
+    ctx.store.setStore(this._configureStore(initialState));
 
-  ctx.store.mapDispatchToProps(ctx, mapDispatchtoProps(ActionMap));
-};
+    ctx.store.mapStateToProps(ctx, (state) => {
+      const {
+        count
+      } = state;
+
+      return count;
+    });
+
+    ctx.store.mapDispatchToProps(ctx, this.mapDispatchtoProps(ActionMap));
+  }
+}

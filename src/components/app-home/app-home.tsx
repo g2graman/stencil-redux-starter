@@ -1,11 +1,12 @@
 import { Component } from '@stencil/core';
 
 import { style } from 'typestyle';
+import { px } from 'csx';
 
 import { css } from '../../shared/styles';
 
 const homeClass = style({
-  padding: '10px'
+  padding: px(10)
 });
 
 @Component({
@@ -13,7 +14,6 @@ const homeClass = style({
   // styleUrl: 'app-home.css'
 })
 export class AppHome {
-
   render() {
     return (
       <div class={homeClass}>

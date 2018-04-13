@@ -2,11 +2,12 @@ import { Component, Prop } from '@stencil/core';
 import { MatchResults } from '@stencil/router';
 
 import { style } from 'typestyle';
+import { px } from 'csx';
 
 import { css } from '../../shared/styles';
 
 const profileClass = style({
-  padding: '10px'
+  padding: px(10)
 });
 
 
