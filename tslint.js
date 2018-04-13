@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['tslint-config-standard'],
+  extends: ['tslint-config-standard', 'tslint-sonarts'],
   linterOptions: {
     exclude: [
       "src/components.d.ts"
