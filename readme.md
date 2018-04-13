@@ -1,5 +1,5 @@
 
-# Stencil App Starter  [![Build Status](https://travis-ci.org/g2graman/stencil-redux-starter.svg?branch=master)](https://travis-ci.org/g2graman/stencil-redux-starter)
+# Stencil App Starter  [![Build Status](https://travis-ci.org/g2graman/stencil-redux-starter.svg?branch=master)](https://travis-ci.org/g2graman/stencil-redux-starter) [![codecov](https://codecov.io/gh/g2graman/stencil-redux-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/g2graman/stencil-redux-starter)
 Stencil is a compiler for building fast web apps using Web Components.  
   
 Stencil combines the best concepts of the most popular frontend frameworks into a compile-time rather than run-time tool.  Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components that run in any browser supporting the Custom Elements v1 spec.  
