@@ -14,22 +14,32 @@ declare global {
   namespace JSXElements {}
 
   interface HTMLStencilElement extends HTMLElement {
-    componentOnReady (): Promise<this>;
-    componentOnReady (done: (ele?: this) => void): void;
+    componentOnReady(): Promise<this>;
+    componentOnReady(done: (ele?: this) => void): void;
 
-    forceUpdate (): void;
+    forceUpdate(): void;
   }
 
   interface HTMLAttributes {}
 }
 
-import Router, { MatchResults } from '@stencil/router';
+import '@stencil/router';
 import '@stencil/redux';
 
-declare global {
-  interface HTMLAppHomeElement extends HTMLStencilElement {
+import {
+  MatchResults,
+} from '@stencil/router';
 
+declare global {
+
+  namespace StencilComponents {
+    interface AppHome {
+
+    }
   }
+
+  interface HTMLAppHomeElement extends StencilComponents.AppHome, HTMLStencilElement {}
+
   var HTMLAppHomeElement: {
     prototype: HTMLAppHomeElement;
     new (): HTMLAppHomeElement;
@@ -52,10 +62,17 @@ declare global {
   }
 }
 
+
 declare global {
-  interface HTMLAppProfileElement extends HTMLStencilElement {
-    'match': MatchResults;
+
+  namespace StencilComponents {
+    interface AppProfile {
+      'match': MatchResults;
+    }
   }
+
+  interface HTMLAppProfileElement extends StencilComponents.AppProfile, HTMLStencilElement {}
+
   var HTMLAppProfileElement: {
     prototype: HTMLAppProfileElement;
     new (): HTMLAppProfileElement;
@@ -78,10 +95,17 @@ declare global {
   }
 }
 
-declare global {
-  interface HTMLMyAppElement extends HTMLStencilElement {
 
+declare global {
+
+  namespace StencilComponents {
+    interface MyApp {
+
+    }
   }
+
+  interface HTMLMyAppElement extends StencilComponents.MyApp, HTMLStencilElement {}
+
   var HTMLMyAppElement: {
     prototype: HTMLMyAppElement;
     new (): HTMLMyAppElement;

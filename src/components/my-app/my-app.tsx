@@ -2,7 +2,7 @@ import { Component, Prop, State } from '@stencil/core';
 import { Store } from '@stencil/redux';
 
 import container from '../../config/config';
-import getDecorators from "inversify-inject-decorators";
+import getDecorators from 'inversify-inject-decorators';
 
 import { Identifiers } from '../../config/constants';
 

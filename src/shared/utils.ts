@@ -26,7 +26,7 @@ export default class Utilities {
       })).reduce((acc, current) => ({
         ...acc,
         ...current
-      }));
+      }), {});
   }
 
   mapDispatchtoMethods (ctx: MyApp, ActionMap: ActionMap) {
@@ -38,6 +38,7 @@ export default class Utilities {
   }
 
   setupStore (ctx: MyApp, ActionMap: ActionMap, initialState) {
+    console.log(ctx, ctx.store);
     ctx.store.setStore(this._configureStore(initialState));
 
     ctx.store.mapStateToProps(ctx, (state) => {

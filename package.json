@@ -13,7 +13,7 @@
     "start": "npm run dev",
     "lint": "npx tslint -c tslint.js 'src/**/*.ts'",
     "ci": "npm run lint && npm run test",
-    "test": "npx jest --no-cache",
+    "test": "npx jest --no-cache --coverage",
     "test.watch": "npx jest --watch --no-cache",
     "view.coverage": "npx lite-server -c bs-config.json"
   },
@@ -23,15 +23,17 @@
     }
   },
   "dependencies": {
-    "@stencil/core": "0.7.7",
-    "@stencil/redux": "0.0.4",
-    "@stencil/router": "0.0.28",
+    "@stencil/core": "^0.7.22",
+    "@stencil/redux": "^0.0.4",
+    "@stencil/router": "^0.0.28",
+    "@types/lodash": "^4.14.106",
     "@types/lodash-es": "^4.17.0",
     "csx": "^8.5.0",
     "express": "^4.16.3",
     "inversify": "^4.11.1",
     "inversify-inject-decorators": "^3.1.0",
     "lodash": "^4.17.5",
+    "lodash-es": "^4.17.8",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
@@ -42,10 +44,9 @@
   "devDependencies": {
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
-    "@types/jest": "^21.1.1",
-    "husky": "^0.15.0-rc.13",
-    "jest": "^21.2.1",
-    "jest-cli": "^22.4.3",
+    "@types/jest": "^22.2.3",
+    "husky": "^1.0.0-rc.1",
+    "jest": "^22.4.3",
     "lint-staged": "^7.0.1",
     "tslint": "^5.9.1",
     "tslint-config-standard": "^7.0.0"
@@ -53,10 +54,10 @@
   "license": "MIT",
   "lint-staged": {
     "*.spec.ts": [
-      "yarn test --bail --findRelatedTests -o"
+      "yarn test --env=jsdom --findRelatedTests -o"
     ],
     "src/**/*.ts": [
-      "npx tslint -c tslint.json --fix",
+      "npx tslint -c tslint.js --fix",
       "git add"
     ]
   },
@@ -67,13 +68,16 @@
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
     },
+    "moduleNameMapper": {
+      "lodash-es": "lodash"
+    },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
       "js",
-      "json",
-      "jsx"
+      "jsx",
+      "json"
     ]
   }
 }
